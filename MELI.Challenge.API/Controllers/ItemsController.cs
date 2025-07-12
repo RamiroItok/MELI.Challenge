@@ -20,7 +20,7 @@ namespace MELI.Challenge.API.Controllers
         /// <summary>
         /// Obtiene los detalles completos de un producto por su ID.
         /// </summary>
-        /// <param name="id">El ID del producto en Mercado Libre (ej: MLA123456).</param>
+        /// <param name="id">El ID del producto en Mercado Libre (ej: MELI-00001).</param>
         /// <param name="cancellationToken"></param>
         /// <returns>Los detalles completos del producto, incluyendo vendedor y opiniones.</returns>
         /// <response code="200">Devuelve el producto solicitado.</response>
