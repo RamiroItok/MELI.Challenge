@@ -1,6 +1,8 @@
 ﻿using MELI.Challenge.Application.Shared;
+using MELI.Challenge.Application.Shared.Enum;
 using System.Net;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace MELI.Challenge.API.Middleware
 {
@@ -28,8 +30,15 @@ namespace MELI.Challenge.API.Middleware
                 context.Response.ContentType = "application/json";
                 context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
-                var response = BaseResponse<object>.Failure("Ocurrió un error interno en el servidor.");
-                var jsonResponse = JsonSerializer.Serialize(response);
+                var response = BaseResponse<object>.Failure("Ocurrió un error interno en el servidor.", ErrorType.Unhandled);
+
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                    Converters = { new JsonStringEnumConverter() }
+                };
+
+                var jsonResponse = JsonSerializer.Serialize(response, options);
 
                 await context.Response.WriteAsync(jsonResponse);
             }

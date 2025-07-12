@@ -2,6 +2,7 @@
 using MELI.Challenge.Application.DTOs;
 using MELI.Challenge.Application.Queries;
 using MELI.Challenge.Application.Shared;
+using MELI.Challenge.Application.Shared.Enum;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MELI.Challenge.API.Controllers
@@ -33,10 +34,15 @@ namespace MELI.Challenge.API.Controllers
             var request = new GetItemByIdRequest(id);
             var response = await _getItemByIdHandler.Handle(request, cancellationToken);
 
-            if (!response.IsSuccess)
-                return NotFound(response);
+            if (response.IsSuccess)
+                return Ok(response);
 
-            return Ok(response);
+            return response.ErrorType switch
+            {
+                ErrorType.NotFound => NotFound(response),
+                ErrorType.Validation => BadRequest(response),
+                _ => StatusCode(500, response)
+            };
         }
     }
 }
