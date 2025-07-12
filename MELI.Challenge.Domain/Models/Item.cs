@@ -1,4 +1,5 @@
 ﻿using MELI.Challenge.Domain.Enums;
+using MELI.Challenge.Domain.Shared;
 using System.Text;
 
 namespace MELI.Challenge.Domain.Models
@@ -31,16 +32,16 @@ namespace MELI.Challenge.Domain.Models
             var errors = new StringBuilder();
 
             if (string.IsNullOrWhiteSpace(id))
-                errors.AppendLine("Item ID cannot be null or empty.");
+                errors.AppendLine(ItemsErrors.IdCannotBeNull);
 
             if (string.IsNullOrWhiteSpace(title))
-                errors.AppendLine("Item Title cannot be null or empty.");
+                errors.AppendLine(ItemsErrors.TitleCannotBeNull);
 
             if (price is null || price.Amount <= 0)
-                errors.AppendLine("Price must be greater than zero.");
+                errors.AppendLine(ItemsErrors.PriceIsInvalid);
 
             if (pictures is null || pictures.Count == 0)
-                errors.AppendLine("Item must have at least one picture.");
+                errors.AppendLine(ItemsErrors.PicturesAreEmpty);
 
             if (errors.Length > 0)
                 return (null, errors.ToString());

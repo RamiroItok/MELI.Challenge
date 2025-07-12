@@ -1,4 +1,6 @@
-﻿namespace MELI.Challenge.Domain.Models
+﻿using MELI.Challenge.Domain.Shared;
+
+namespace MELI.Challenge.Domain.Models
 {
     public class Review
     {
@@ -14,10 +16,10 @@
         public static (Review? Review, string ErrorMessage) TryCreate(int id, string itemId, int rating, string title, string content, DateTime dateCreated)
         {
             if (rating < 1 || rating > 5)
-                return (null, "Raiting must have between 1 y 5.");
+                return (null, ReviewErrors.RatingIsInvalid);
 
             if (string.IsNullOrWhiteSpace(title))
-                return (null, "The tittle of the review can not be empty");
+                return (null, ReviewErrors.TitleIsInvalid);
 
             var review = new Review
             {

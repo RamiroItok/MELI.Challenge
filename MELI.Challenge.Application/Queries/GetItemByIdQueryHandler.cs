@@ -2,6 +2,7 @@
 using MELI.Challenge.Application.DTOs;
 using MELI.Challenge.Application.Shared;
 using MELI.Challenge.Domain.Repositories;
+using MELI.Challenge.Domain.Shared;
 
 namespace MELI.Challenge.Application.Queries
 {
@@ -25,7 +26,7 @@ namespace MELI.Challenge.Application.Queries
             var item = await _itemRepository.GetByIdAsync(query.Id, cancellationToken);
 
             if (item is null)
-                return BaseResponse<ItemResponseDTO>.Failure("Product do not exist");
+                return BaseResponse<ItemResponseDTO>.Failure(ItemsErrors.ProductDoNotExist);
 
             var sellerInfo = await _sellerRepository.GetByIdAsync(item.SellerId, cancellationToken);
 
