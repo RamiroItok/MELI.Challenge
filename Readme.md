@@ -1,4 +1,5 @@
 Desafío Backend - API de Detalles de Producto
+
 Este proyecto es una implementación de una API de backend desarrollada como parte de un desafío técnico. El objetivo es proporcionar todos los datos necesarios para renderizar una página de detalles de un producto, inspirada en el diseño de Mercado Libre.
 
 Arquitectura Implementada
