@@ -1,0 +1,60 @@
+[
+  {
+    "Id": "MELI-00001",
+    "SellerId": 1001,
+    "Title": "Celular Samsung Galaxy S24 256gb Nuevo",
+    "Price": {
+      "Amount": 1500.50,
+      "Currency": "USD"
+    },
+    "Pictures": [
+      "https://http2.mlstatic.com/D_NQ_NP_890184-MLA74399778263_022024-O.webp"
+    ],
+    "Condition": "New",
+    "FreeShipping": true,
+    "Description": "Descubre la nueva era de la inteligencia artificial con el Galaxy S24. Con un diseño elegante y una pantalla Dynamic AMOLED 2X, este dispositivo te ofrece una experiencia visual inmersiva. Su potente procesador y su cámara de alta resolución te permitirán capturar tus mejores momentos con una calidad excepcional.",
+    "Attributes": [
+      {
+        "Name": "Marca",
+        "Value": "Samsung"
+      },
+      {
+        "Name": "Modelo",
+        "Value": "Galaxy S24"
+      },
+      {
+        "Name": "Memoria interna",
+        "Value": "256 GB"
+      }
+    ]
+  },
+  {
+    "Id": "MELI-00002",
+    "SellerId": 1002,
+    "Title": "Auriculares Inalámbricos Sony WH-1000XM5",
+    "Price": {
+      "Amount": 450.00,
+      "Currency": "USD"
+    },
+    "Pictures": [
+      "https://http2.mlstatic.com/D_NQ_NP_868817-MLA50989076847_082022-O.webp"
+    ],
+    "Condition": "New",
+    "FreeShipping": false,
+    "Description": "Sumérgete en un sonido de alta fidelidad con los auriculares inalámbricos Sony WH-1000XM5. Con la mejor cancelación de ruido del mercado, podrás disfrutar de tu música sin distracciones. Su diseño ligero y cómodo te permitirá usarlos durante horas.",
+    "Attributes": [
+      {
+        "Name": "Marca",
+        "Value": "Sony"
+      },
+      {
+        "Name": "Modelo",
+        "Value": "WH-1000XM5"
+      },
+      {
+        "Name": "Con cancelación de ruido",
+        "Value": "Sí"
+      }
+    ]
+  }
+]

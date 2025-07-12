@@ -1,0 +1,26 @@
+[
+  {
+    "Id": 501,
+    "ItemId": "MELI-00001",
+    "Rating": 5,
+    "Title": "Excelente, lo mejor del mercado",
+    "Content": "La batería dura todo el día y la cámara es espectacular. Superó mis expectativas.",
+    "DateCreated": "2025-06-15T10:30:00Z"
+  },
+  {
+    "Id": 502,
+    "ItemId": "MELI-00001",
+    "Rating": 4,
+    "Title": "Muy buen producto",
+    "Content": "Es rápido y la pantalla se ve increíble. Lo único es que es un poco caro, pero lo vale.",
+    "DateCreated": "2025-06-20T15:00:00Z"
+  },
+  {
+    "Id": 503,
+    "ItemId": "MELI-00002",
+    "Rating": 5,
+    "Title": "Cancelación de ruido impresionante",
+    "Content": "Perfectos para viajar en transporte público, no se escucha nada del exterior.",
+    "DateCreated": "2025-07-01T09:00:00Z"
+  }
+]

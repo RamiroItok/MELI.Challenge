@@ -1,0 +1,14 @@
+[
+  {
+    "Id": 1001,
+    "Nickname": "SuperVendedor_Arg",
+    "Reputation": "MercadoLiderPlatinum",
+    "SellingSince": 2018
+  },
+  {
+    "Id": 1002,
+    "Nickname": "TecnoTienda_Oficial",
+    "Reputation": "MercadoLiderGold",
+    "SellingSince": 2020
+  }
+]
