@@ -1,9 +1,7 @@
 Desafío Backend - API de Detalles de Producto
-
 Este proyecto es una implementación de una API de backend desarrollada como parte de un desafío técnico. El objetivo es proporcionar todos los datos necesarios para renderizar una página de detalles de un producto, inspirada en el diseño de Mercado Libre.
 
 Arquitectura Implementada
-
 El proyecto sigue los principios de Arquitectura Limpia (Clean Architecture), separando las responsabilidades en distintas capas para lograr un sistema desacoplado, mantenible y fácil de probar.
 
 * Domain: Contiene la lógica y las reglas de negocio más puras. Define las entidades (Item, Review), los objetos (Price, SellerInfo) y los contratos (interfaces de los repositorios como IItemRepository). No depende de ninguna otra capa.
@@ -19,7 +17,6 @@ El proyecto sigue los principios de Arquitectura Limpia (Clean Architecture), se
 La regla fundamental es la Inversión de Dependencias: todas las dependencias apuntan hacia el interior, hacia el Domain, haciendo que el núcleo del negocio sea independiente de los detalles de implementación.
 
 ¿Por que se utiliza el patrón CQRS?
-
 Este patrón Command Query Responsibility Segregation implica:
 * Crecimiento Sostenible: Es fácil agregar nueva funcionalidad. Solo creas un nuevo par de archivos (petición y manejador) y no tocas nada de lo que ya existe y funciona.
 * Paralelismo en Equipos: Si dos desarrolladores necesitan trabajar en dos funcionalidades distintas, es muy poco probable que editen los mismos archivos, lo que reduce los conflictos de código.
@@ -28,7 +25,6 @@ Este patrón Command Query Responsibility Segregation implica:
 * Single-responsibility principle
 
 Estrategia técnica:
-
 Tecnologías Utilizadas
 - .NET 9
 - ASP.NET Core: Para la construcción de la API REST.
@@ -37,6 +33,5 @@ Tecnologías Utilizadas
 - Persistencia de Datos: Archivos JSON locales.
 
 GenAI:
-
 Se utilizó un asistente de IA (Gemini) como consultor técnico durante todo el proceso. Su rol fue importante para mejorar la eficiencia en varias áreas:
 * Diseño Arquitectónico y Tutoría: El asistente ayudó a definir y explicar los fundamentos de la Arquitectura Limpia, el patrón CQRS y el Principio de Inversión de Dependencias, asegurando que la base del proyecto fuera sólida y siguiera las mejores prácticas
