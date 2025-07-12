@@ -1,23 +1,36 @@
 ﻿using MELI.Challenge.Application.Queries;
 using MELI.Challenge.Tests.Mocks;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace MELI.Challenge.Tests
 {
     public class GetItemByIdQueryHandlerTests
     {
+        private readonly MockItemRepository _itemRepoMock;
+        private readonly MockSellerRepository _sellerRepoMock;
+        private readonly MockReviewRepository _reviewRepoMock;
+        private readonly ILogger<GetItemByIdQueryHandler> _loggerMock;
+        private readonly GetItemByIdQueryHandler _handler;
+
+        public GetItemByIdQueryHandlerTests()
+        {
+            _itemRepoMock = new MockItemRepository();
+            _sellerRepoMock = new MockSellerRepository();
+            _reviewRepoMock = new MockReviewRepository();
+            _loggerMock = NullLogger<GetItemByIdQueryHandler>.Instance;
+
+            _handler = new GetItemByIdQueryHandler(_itemRepoMock, _sellerRepoMock, _reviewRepoMock, _loggerMock);
+        }
+
         [Fact]
         public async Task Handle_Should_ReturnSuccess_WhenItemExists()
         {
             // Arrange
-            var itemRepoMock = new MockItemRepository();
-            var sellerRepoMock = new MockSellerRepository();
-            var reviewRepoMock = new MockReviewRepository();
-
-            var handler = new GetItemByIdQueryHandler(itemRepoMock, sellerRepoMock, reviewRepoMock);
             var request = new GetItemByIdRequest("MLA123_SUCCESS");
 
             // Act
-            var response = await handler.Handle(request, CancellationToken.None);
+            var response = await _handler.Handle(request, CancellationToken.None);
 
             // Assert
             Assert.True(response.IsSuccess);
@@ -29,15 +42,10 @@ namespace MELI.Challenge.Tests
         public async Task Handle_Should_ReturnFailure_WhenItemDoesNotExist()
         {
             // Arrange
-            var itemRepoMock = new MockItemRepository();
-            var sellerRepoMock = new MockSellerRepository();
-            var reviewRepoMock = new MockReviewRepository();
-
-            var handler = new GetItemByIdQueryHandler(itemRepoMock, sellerRepoMock, reviewRepoMock);
             var request = new GetItemByIdRequest("ID_INEXISTENTE");
 
             // Act
-            var response = await handler.Handle(request, CancellationToken.None);
+            var response = await _handler.Handle(request, CancellationToken.None);
 
             // Assert
             Assert.False(response.IsSuccess);
