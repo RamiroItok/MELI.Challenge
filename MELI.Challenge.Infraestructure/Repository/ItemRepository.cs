@@ -11,6 +11,7 @@ namespace MELI.Challenge.Infraestructure.Repository
     {
         public async Task<Item> GetByIdAsync(string id, CancellationToken cancellationToken)
         {
+            Console.WriteLine($"Este es el ID que ingresa por parametro: {id}");
             var basePath = AppContext.BaseDirectory;
             Console.WriteLine($"[DEBUG] Ruta base del archivo: {basePath}");
             var filePath = Path.Combine(basePath, "Data", "items.json");
@@ -25,22 +26,8 @@ namespace MELI.Challenge.Infraestructure.Repository
 
             var itemsData = JsonSerializer.Deserialize<List<ItemData>>(jsonContent, options);
             Console.WriteLine($"ItemsData: {JsonSerializer.Serialize<List<ItemData>>(itemsData)}");
-            Console.WriteLine("--- INICIANDO BÚSQUEDA MANUAL ---");
-            ItemData itemData = null;
+            var itemData = itemsData?.FirstOrDefault(i => i.Id.Equals(id, StringComparison.OrdinalIgnoreCase));
 
-            foreach (var itemEncontrado in itemsData)
-            {
-                string idEncontrado = itemEncontrado.Id ?? "ID ES NULO";
-                Console.WriteLine($"Comparando ID de entrada ('{id}') con ID del objeto ('{idEncontrado}')");
-
-                if (id.Equals(itemEncontrado.Id, StringComparison.OrdinalIgnoreCase))
-                {
-                    Console.WriteLine(">>> ¡ID ENCONTRADO! <<<");
-                    itemData = itemEncontrado;
-                    break;
-                }
-            }
-            Console.WriteLine("--- FIN DE BÚSQUEDA MANUAL ---");
             Console.WriteLine($"ItemData: {JsonSerializer.Serialize<ItemData>(itemData)}");
             if (itemData is null)
                 return null;
