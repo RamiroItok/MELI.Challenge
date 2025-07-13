@@ -5,18 +5,13 @@ using System.Text.Json;
 
 namespace MELI.Challenge.Infraestructure.Repository
 {
-    public class ReviewRepository : IReviewRepository
+    public class ReviewRepository : BaseRepository, IReviewRepository
     {
         public async Task<IEnumerable<Review>> GetByItemIdAsync(string itemId, CancellationToken cancellationToken)
         {
-            var basePath = AppContext.BaseDirectory;
-            var filePath = Path.Combine(basePath, "Data", "Reviews.json");
-            var jsonContent = await File.ReadAllTextAsync(filePath, cancellationToken);
+            var jsonContent = await ReadJsonFileAsync("reviews.json", cancellationToken);
 
-            var reviewsData = JsonSerializer.Deserialize<List<ReviewData>>(jsonContent, new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true
-            });
+            var reviewsData = JsonSerializer.Deserialize<List<ReviewData>>(jsonContent, DefaultJsonOptions);
 
             if (reviewsData is null)
                 return Enumerable.Empty<Review>();

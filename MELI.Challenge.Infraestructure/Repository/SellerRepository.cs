@@ -1,27 +1,17 @@
-﻿using MELI.Challenge.Domain.Enums;
-using MELI.Challenge.Domain.Models;
+﻿using MELI.Challenge.Domain.Models;
 using MELI.Challenge.Domain.Repositories;
 using MELI.Challenge.Infraestructure.DTOs;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace MELI.Challenge.Infraestructure.Repository
 {
-    public class SellerRepository : ISellerRepository
+    public class SellerRepository : BaseRepository, ISellerRepository
     {
         public async Task<SellerInfo?> GetByIdAsync(int id, CancellationToken cancellationToken)
         {
-            var basePath = AppContext.BaseDirectory;
-            var filePath = Path.Combine(basePath, "Data", "sellers.json");
-            var jsonContent = await File.ReadAllTextAsync(filePath, cancellationToken);
+            var jsonContent = await ReadJsonFileAsync("sellers.json", cancellationToken);
 
-            var options = new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true,
-                Converters = { new JsonStringEnumConverter() }
-            };
-
-            var sellersData = JsonSerializer.Deserialize<List<SellerData>>(jsonContent, options);
+            var sellersData = JsonSerializer.Deserialize<List<SellerData>>(jsonContent, DefaultJsonOptions);
 
             var sellerData = sellersData?.FirstOrDefault(s => s.Id == id);
 
