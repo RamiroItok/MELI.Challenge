@@ -22,7 +22,8 @@ namespace MELI.Challenge.Infraestructure.Repository
 
             if (reviewsData is null)
                 return Enumerable.Empty<Review>();
-            Console.WriteLine($"ReviewsData: {reviewsData}");
+
+            Console.WriteLine($"ReviewsData: {JsonSerializer.Serialize<List<ReviewData>>(reviewsData)}");
             var filteredReviewsData = reviewsData.Where(r => r.ItemId.Equals(itemId, StringComparison.OrdinalIgnoreCase));
 
             var validReviews = new List<Review>();

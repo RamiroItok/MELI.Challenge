@@ -23,7 +23,8 @@ namespace MELI.Challenge.Infraestructure.Repository
             };
 
             var sellersData = JsonSerializer.Deserialize<List<SellerData>>(jsonContent, options);
-            Console.WriteLine($"SellersData: {sellersData}");
+
+            Console.WriteLine($"SellersData: {JsonSerializer.Serialize<List<SellerData>>(sellersData)}");
             var sellerData = sellersData?.FirstOrDefault(s => s.Id == id);
 
             if (sellerData is null)

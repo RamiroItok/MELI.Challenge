@@ -24,7 +24,7 @@ namespace MELI.Challenge.Infraestructure.Repository
             };
 
             var itemsData = JsonSerializer.Deserialize<List<ItemData>>(jsonContent, options);
-            Console.WriteLine($"ItemsData: {itemsData}");
+            Console.WriteLine($"ItemsData: {JsonSerializer.Serialize<List<ItemData>>(itemsData)}");
             var itemData = itemsData?.FirstOrDefault(i => i.Id.Equals(id, StringComparison.OrdinalIgnoreCase));
 
             if (itemData is null)
