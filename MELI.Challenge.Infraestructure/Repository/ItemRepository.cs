@@ -27,6 +27,7 @@ namespace MELI.Challenge.Infraestructure.Repository
             Console.WriteLine($"ItemsData: {JsonSerializer.Serialize<List<ItemData>>(itemsData)}");
             var itemData = itemsData?.FirstOrDefault(i => i.Id.Equals(id, StringComparison.OrdinalIgnoreCase));
 
+            Console.WriteLine($"ItemData: {JsonSerializer.Serialize<ItemData>(itemData)}");
             if (itemData is null)
                 return null;
 
@@ -47,6 +48,8 @@ namespace MELI.Challenge.Infraestructure.Repository
                 Console.WriteLine(errorMessage);
                 return null;
             }
+
+            Console.WriteLine($"Item: {JsonSerializer.Serialize<Item>(item)}");
 
             return item;
         }
