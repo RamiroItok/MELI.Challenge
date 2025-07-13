@@ -25,8 +25,22 @@ namespace MELI.Challenge.Infraestructure.Repository
 
             var itemsData = JsonSerializer.Deserialize<List<ItemData>>(jsonContent, options);
             Console.WriteLine($"ItemsData: {JsonSerializer.Serialize<List<ItemData>>(itemsData)}");
-            var itemData = itemsData?.FirstOrDefault(i => i.Id.Equals(id, StringComparison.OrdinalIgnoreCase));
+            Console.WriteLine("--- INICIANDO BÚSQUEDA MANUAL ---");
+            ItemData itemData = null;
 
+            foreach (var itemEncontrado in itemsData)
+            {
+                string idEncontrado = itemEncontrado.Id ?? "ID ES NULO";
+                Console.WriteLine($"Comparando ID de entrada ('{id}') con ID del objeto ('{idEncontrado}')");
+
+                if (id.Equals(itemEncontrado.Id, StringComparison.OrdinalIgnoreCase))
+                {
+                    Console.WriteLine(">>> ¡ID ENCONTRADO! <<<");
+                    itemData = itemEncontrado;
+                    break;
+                }
+            }
+            Console.WriteLine("--- FIN DE BÚSQUEDA MANUAL ---");
             Console.WriteLine($"ItemData: {JsonSerializer.Serialize<ItemData>(itemData)}");
             if (itemData is null)
                 return null;
