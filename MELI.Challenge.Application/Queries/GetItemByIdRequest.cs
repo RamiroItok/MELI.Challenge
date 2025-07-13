@@ -6,11 +6,6 @@ namespace MELI.Challenge.Application.Queries
 {
     public class GetItemByIdRequest : IRequest<BaseResponse<ItemResponseDTO>>
     {
-        public string Id { get; }
-
-        public GetItemByIdRequest(string id)
-        {
-            Id = id;
-        }
+        public string Id { get; set; }
     }
 }

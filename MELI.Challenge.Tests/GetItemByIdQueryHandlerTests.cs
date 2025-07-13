@@ -27,7 +27,10 @@ namespace MELI.Challenge.Tests
         public async Task Handle_Should_ReturnSuccess_WhenItemExists()
         {
             // Arrange
-            var request = new GetItemByIdRequest("MLA123_SUCCESS");
+            var request = new GetItemByIdRequest()
+            {
+                Id = "MLA123_SUCCESS"
+            };
 
             // Act
             var response = await _handler.Handle(request, CancellationToken.None);
@@ -42,7 +45,10 @@ namespace MELI.Challenge.Tests
         public async Task Handle_Should_ReturnFailure_WhenItemDoesNotExist()
         {
             // Arrange
-            var request = new GetItemByIdRequest("ID_INEXISTENTE");
+            var request = new GetItemByIdRequest()
+            {
+                Id = "ID_INEXISTENTE"
+            };
 
             // Act
             var response = await _handler.Handle(request, CancellationToken.None);

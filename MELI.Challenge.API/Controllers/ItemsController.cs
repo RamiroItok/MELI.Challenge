@@ -29,9 +29,9 @@ namespace MELI.Challenge.API.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(BaseResponse<ItemResponseDTO>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(BaseResponse<object>), StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetItemById(string id, CancellationToken cancellationToken)
+        public async Task<IActionResult> GetItemById([FromRoute] GetItemByIdRequest request, CancellationToken cancellationToken)
         {
-            var request = new GetItemByIdRequest(id);
+            //var request = new GetItemByIdRequest(id);
             var response = await _getItemByIdHandler.Handle(request, cancellationToken);
 
             if (response.IsSuccess)
