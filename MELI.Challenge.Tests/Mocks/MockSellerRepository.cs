@@ -11,14 +11,14 @@ namespace MELI.Challenge.Tests.Mocks
             if (id != 1001)
                 return Task.FromResult<SellerInfo?>(null);
 
-            var seller = new SellerInfo(
+            var (seller, errorMessage) = SellerInfo.TryCreate(
                 id: 1001,
                 nickname: "VENDEDOR_DE_PRUEBA",
                 reputation: Reputation.MercadoLiderPlatinum,
                 sellingSince: 2019
             );
 
-            return Task.FromResult<SellerInfo?>(seller);
+            return Task.FromResult(seller);
         }
     }
 }

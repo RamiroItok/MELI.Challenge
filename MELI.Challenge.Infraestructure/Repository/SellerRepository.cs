@@ -1,5 +1,7 @@
-﻿using MELI.Challenge.Domain.Models;
+﻿using MELI.Challenge.Domain.Enums;
+using MELI.Challenge.Domain.Models;
 using MELI.Challenge.Domain.Repositories;
+using MELI.Challenge.Infraestructure.DTOs;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -12,13 +14,34 @@ namespace MELI.Challenge.Infraestructure.Repository
             var basePath = AppContext.BaseDirectory;
             var filePath = Path.Combine(basePath, "Data", "sellers.json");
             var jsonContent = await File.ReadAllTextAsync(filePath, cancellationToken);
-            var sellers = JsonSerializer.Deserialize<List<SellerInfo>>(jsonContent, new JsonSerializerOptions
+
+            var options = new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true,
                 Converters = { new JsonStringEnumConverter() }
-            });
+            };
 
-            return sellers?.FirstOrDefault(s => s.Id == id);
+            var sellersData = JsonSerializer.Deserialize<List<SellerData>>(jsonContent, options);
+
+            var sellerData = sellersData?.FirstOrDefault(s => s.Id == id);
+
+            if (sellerData is null)
+                return null;
+
+            var (seller, errorMessage) = SellerInfo.TryCreate(
+                sellerData.Id,
+                sellerData.Nickname,
+                sellerData.Reputation,
+                sellerData.SellingSince
+            );
+
+            if (!string.IsNullOrEmpty(errorMessage))
+            {
+                Console.WriteLine($"Error al validar el vendedor {sellerData.Id}: {errorMessage}");
+                return null;
+            }
+
+            return seller;
         }
     }
 }

@@ -72,7 +72,7 @@ namespace MELI.Challenge.Application.Queries
             }
             catch (JsonException ex)
             {
-                _logger.LogError(ex, "El formato de uno de los archivos JSON es inválido.");
+                _logger.LogError(ex, "The format of one of the JSON files is invalid.");
 
                 return BaseResponse<ItemResponseDTO>.Failure(SharedErrors.DataProcessing, ErrorType.Validation);
             }

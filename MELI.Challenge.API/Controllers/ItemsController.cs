@@ -28,6 +28,7 @@ namespace MELI.Challenge.API.Controllers
         /// <response code="404">Si el producto con el ID especificado no se encuentra.</response>
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(BaseResponse<ItemResponseDTO>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(BaseResponse<object>), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(BaseResponse<object>), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetItemById([FromRoute] GetItemByIdRequest request, CancellationToken cancellationToken)
         {
