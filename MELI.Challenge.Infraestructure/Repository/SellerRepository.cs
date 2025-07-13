@@ -11,7 +11,9 @@ namespace MELI.Challenge.Infraestructure.Repository
         public async Task<SellerInfo?> GetByIdAsync(int id, CancellationToken cancellationToken)
         {
             var basePath = AppContext.BaseDirectory;
+            Console.WriteLine($"[DEBUG] Ruta base del archivo: {basePath}");
             var filePath = Path.Combine(basePath, "Data", "sellers.json");
+            Console.WriteLine($"[DEBUG] Ruta completa del archivo: {filePath}");
             var jsonContent = await File.ReadAllTextAsync(filePath, cancellationToken);
 
             var options = new JsonSerializerOptions
@@ -21,7 +23,7 @@ namespace MELI.Challenge.Infraestructure.Repository
             };
 
             var sellersData = JsonSerializer.Deserialize<List<SellerData>>(jsonContent, options);
-
+            Console.WriteLine($"SellersData: {sellersData}");
             var sellerData = sellersData?.FirstOrDefault(s => s.Id == id);
 
             if (sellerData is null)

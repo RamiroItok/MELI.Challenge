@@ -10,7 +10,9 @@ namespace MELI.Challenge.Infraestructure.Repository
         public async Task<IEnumerable<Review>> GetByItemIdAsync(string itemId, CancellationToken cancellationToken)
         {
             var basePath = AppContext.BaseDirectory;
+            Console.WriteLine($"[DEBUG] Ruta base del archivo: {basePath}");
             var filePath = Path.Combine(basePath, "Data", "Reviews.json");
+            Console.WriteLine($"[DEBUG] Ruta completa del archivo: {filePath}");
             var jsonContent = await File.ReadAllTextAsync(filePath, cancellationToken);
 
             var reviewsData = JsonSerializer.Deserialize<List<ReviewData>>(jsonContent, new JsonSerializerOptions
@@ -20,7 +22,7 @@ namespace MELI.Challenge.Infraestructure.Repository
 
             if (reviewsData is null)
                 return Enumerable.Empty<Review>();
-
+            Console.WriteLine($"ReviewsData: {reviewsData}");
             var filteredReviewsData = reviewsData.Where(r => r.ItemId.Equals(itemId, StringComparison.OrdinalIgnoreCase));
 
             var validReviews = new List<Review>();
