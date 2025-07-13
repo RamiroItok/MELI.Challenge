@@ -3,16 +3,25 @@ using MELI.Challenge.Domain.Models;
 using MELI.Challenge.Domain.Repositories;
 using MELI.Challenge.Infraestructure.DTOs;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace MELI.Challenge.Infraestructure.Repository
 {
-    public class ItemRepository : BaseRepository, IItemRepository
+    public class ItemRepository : IItemRepository
     {
         public async Task<Item> GetByIdAsync(string id, CancellationToken cancellationToken)
         {
-            var jsonContent = await ReadJsonFileAsync("items.json", cancellationToken);
+            var basePath = AppContext.BaseDirectory;
+            var filePath = Path.Combine(basePath, "Data", "items.json");
+            var jsonContent = await File.ReadAllTextAsync(filePath, cancellationToken);
 
-            var itemsData = JsonSerializer.Deserialize<List<ItemData>>(jsonContent, DefaultJsonOptions);
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true,
+                Converters = { new JsonStringEnumConverter() }
+            };
+
+            var itemsData = JsonSerializer.Deserialize<List<ItemData>>(jsonContent, options);
 
             var itemData = itemsData?.FirstOrDefault(i => i.Id.Equals(id, StringComparison.OrdinalIgnoreCase));
 
