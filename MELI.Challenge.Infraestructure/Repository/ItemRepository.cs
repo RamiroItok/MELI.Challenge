@@ -3,29 +3,15 @@ using MELI.Challenge.Domain.Models;
 using MELI.Challenge.Domain.Repositories;
 using MELI.Challenge.Infraestructure.DTOs;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace MELI.Challenge.Infraestructure.Repository
 {
-    public class ItemRepository : IItemRepository
+    public class ItemRepository : BaseRepository, IItemRepository
     {
         public async Task<Item> GetByIdAsync(string id, CancellationToken cancellationToken)
         {
-            Console.WriteLine($"Este es el ID que ingresa por parametro: {id}");
-            var basePath = AppContext.BaseDirectory;
-            Console.WriteLine($"[DEBUG] Ruta base del archivo: {basePath}");
-            var filePath = Path.Combine(basePath, "Data", "items.json");
-            Console.WriteLine($"[DEBUG] Ruta completa del archivo: {filePath}");
-            var jsonContent = await File.ReadAllTextAsync(filePath, cancellationToken);
-
-            var options = new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true,
-                Converters = { new JsonStringEnumConverter() }
-            };
-
-            var itemsData = JsonSerializer.Deserialize<List<ItemData>>(jsonContent, options);
-            Console.WriteLine($"ItemsData: {JsonSerializer.Serialize<List<ItemData>>(itemsData)}");
+            var jsonContent = await ReadJsonFileAsync("items.json", cancellationToken);
+            var itemsData = JsonSerializer.Deserialize<List<ItemData>>(jsonContent, DefaultJsonOptions);
             var itemData = itemsData?.FirstOrDefault(i => i.Id.Equals(id, StringComparison.OrdinalIgnoreCase));
 
             Console.WriteLine($"ItemData: {JsonSerializer.Serialize<ItemData>(itemData)}");
@@ -49,8 +35,6 @@ namespace MELI.Challenge.Infraestructure.Repository
                 Console.WriteLine(errorMessage);
                 return null;
             }
-
-            Console.WriteLine($"Item: {JsonSerializer.Serialize<Item>(item)}");
 
             return item;
         }
