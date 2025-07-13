@@ -12,7 +12,9 @@ namespace MELI.Challenge.Infraestructure.Repository
         public async Task<Item> GetByIdAsync(string id, CancellationToken cancellationToken)
         {
             var basePath = AppContext.BaseDirectory;
+            Console.WriteLine($"[DEBUG] Ruta base del archivo: {basePath}");
             var filePath = Path.Combine(basePath, "Data", "items.json");
+            Console.WriteLine($"[DEBUG] Ruta completa del archivo: {filePath}");
             var jsonContent = await File.ReadAllTextAsync(filePath, cancellationToken);
 
             var options = new JsonSerializerOptions
