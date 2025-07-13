@@ -1,4 +1,5 @@
 ﻿using MELI.Challenge.Application.Queries;
+using MELI.Challenge.Domain.Shared;
 using MELI.Challenge.Tests.Mocks;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
@@ -56,7 +57,7 @@ namespace MELI.Challenge.Tests
             // Assert
             Assert.False(response.IsSuccess);
             Assert.Null(response.Data);
-            Assert.Equal("Product do not exist", response.ErrorMessage);
+            Assert.Equal(ItemsErrors.ProductDoNotExist, response.ErrorMessage);
         }
     }
 }

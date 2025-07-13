@@ -1,5 +1,6 @@
 ﻿using MELI.Challenge.Application.Shared;
 using MELI.Challenge.Application.Shared.Enum;
+using MELI.Challenge.Domain.Shared;
 using System.Net;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -30,7 +31,7 @@ namespace MELI.Challenge.API.Middleware
                 context.Response.ContentType = "application/json";
                 context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
-                var response = BaseResponse<object>.Failure("Ocurrió un error interno en el servidor.", ErrorType.Unhandled);
+                var response = BaseResponse<object>.Failure(SharedErrors.InternalServer, ErrorType.Unhandled);
 
                 var options = new JsonSerializerOptions
                 {

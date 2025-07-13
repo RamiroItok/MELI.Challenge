@@ -74,7 +74,7 @@ namespace MELI.Challenge.Application.Queries
             {
                 _logger.LogError(ex, "El formato de uno de los archivos JSON es inválido.");
 
-                return BaseResponse<ItemResponseDTO>.Failure("Hubo un problema al procesar los datos del producto.", ErrorType.Validation);
+                return BaseResponse<ItemResponseDTO>.Failure(SharedErrors.DataProcessing, ErrorType.Validation);
             }
         }
     }
