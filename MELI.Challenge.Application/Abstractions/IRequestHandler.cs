@@ -6,6 +6,7 @@ namespace MELI.Challenge.Application.Abstractions
 {
     public interface IRequestHandler<TRequest, TResponse> where TRequest : IRequest<TResponse>
     {
-        Task<BaseResponse<ItemResponseDTO>> Handle(GetItemByIdRequest query, CancellationToken cancellationToken);
+        //Task<BaseResponse<ItemResponseDTO>> Handle(GetItemByIdRequest query, CancellationToken cancellationToken);
+        Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken);
     }
 }
